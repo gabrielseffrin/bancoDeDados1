@@ -13,3 +13,9 @@ where id_nivel_escolaridade BETWEEN 2 and 7 ORDER by sobrenome;
 SELECT sobrenome, nome as nome_departamento, salario, salario-100 as salario_reduzido 
 from empregado JOIN departamento USING (id_departamento) 
 where departamento.nome LIKE 'Testes' or (salario - (salario*0.8)) or (salario +(salario*120)/100) >= 5000;
+
+select departamento.id_departamento, nome, coalesce(id_departamento_gerencia,'Desconhecido'), sobrenome from departamento  
+join empregado on id_gerente=id_empregado;
+
+select id_empregado, sobrenome, format((datediff(data_contratacao, data_nascimento)/365),0) as 'idade de contratacao' from empregado 
+where (datediff(data_contratacao, data_nascimento)/365)<25 order by datediff(curdate(),data_nascimento);
